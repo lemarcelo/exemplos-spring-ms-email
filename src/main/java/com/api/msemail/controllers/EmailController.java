@@ -22,7 +22,7 @@ public class EmailController {
     public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto){
         EmailModel emailModel = new EmailModel();
         BeanUtils.copyProperties(emailDto, emailModel);
-        emailService.emailSendEmail(emailModel);
+        emailService.sendEmail(emailModel);
         return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
 
     }
