@@ -15,13 +15,8 @@ import java.time.LocalDateTime;
 public class EmailService {
     @Autowired
     EmailRepository emailRepository;
-//TODO Corrigir esta classe
     @Autowired
     private JavaMailSender emailSender;
-
-    public EmailService(JavaMailSender emailSender) {
-        this.emailSender = emailSender;
-    }
 
     public EmailModel sendEmail(EmailModel emailModel) {
         emailModel.setSendDateEmail(LocalDateTime.now());
@@ -34,9 +29,9 @@ public class EmailService {
             emailSender.send(message);
 
             emailModel.setStatusEmail(StatusEmail.SENT);
-        }catch (MailException e){
+        } catch (MailException e){
             emailModel.setStatusEmail(StatusEmail.ERROR);
-        }finally {
+        } finally {
             return emailRepository.save(emailModel);
         }
     }
